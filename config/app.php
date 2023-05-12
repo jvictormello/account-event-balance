@@ -178,8 +178,8 @@ return [
         /*
          * Service Service Providers
          */
-        App\Services\AccountServiceServiceProvider::class,
-        App\Services\EventServiceServiceProvider::class,
+        App\Providers\AccountServiceServiceProvider::class,
+        App\Providers\EventServiceServiceProvider::class,
     ])->toArray(),
 
     /*

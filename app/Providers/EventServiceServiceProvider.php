@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\Account\AccountServiceContract;
-use App\Services\Account\AccountServiceEloquent;
+use App\Services\Event\EventServiceContract;
+use App\Services\Event\EventServiceEloquent;
 use Illuminate\Support\ServiceProvider;
 
-class AccountServiceServiceProvider extends ServiceProvider
+class EventServiceServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -23,8 +23,8 @@ class AccountServiceServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            AccountServiceContract::class,
-            AccountServiceEloquent::class
+            EventServiceContract::class,
+            EventServiceEloquent::class
         );
     }
 
@@ -35,6 +35,6 @@ class AccountServiceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        return [AccountServiceContract::class];
+        return [EventServiceContract::class];
     }
 }
