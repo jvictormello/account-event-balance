@@ -25,7 +25,6 @@ class EventService implements EventServiceContract
             case Event::EVENT_TYPE_DEPOSIT:
                 $account = $this->deposit($eventData);
                 $this->eventRepository->store($eventData);
-
                 return ['destination' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             case Event::EVENT_TYPE_TRANSFER:
@@ -34,7 +33,6 @@ class EventService implements EventServiceContract
             case Event::EVENT_TYPE_WITHDRAW:
                 $account = $this->withdraw($eventData);
                 $this->eventRepository->store($eventData);
-
                 return ['origin' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             default:
@@ -85,10 +83,5 @@ class EventService implements EventServiceContract
         } else {
             throw new Exception('A conta de origem não possui saldo suficiente.', Response::HTTP_NOT_FOUND);
         }
-    }
-
-    private function saveEvent(array $eventData)
-    {
-        $this->eventRepository->store($eventData);
     }
 }
