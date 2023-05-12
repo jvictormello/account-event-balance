@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,7 @@ Route::get('/', function () {
 Route::get('/balance', [AccountController::class, 'show']);
 
 # EventController
-Route::post('/event', [EventController::class, 'store']);
+Route::post('/event', [EventController::class, 'show']);
+
+# ResettController
+Route::post('/reset', [ResetController::class, 'index']);
