@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Event\EventServiceContract;
-use App\Services\Event\EventServiceEloquent;
+use App\Services\Event\EventService;
 use Illuminate\Support\ServiceProvider;
 
 class EventServiceServiceProvider extends ServiceProvider
@@ -24,7 +24,7 @@ class EventServiceServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             EventServiceContract::class,
-            EventServiceEloquent::class
+            EventService::class
         );
     }
 
