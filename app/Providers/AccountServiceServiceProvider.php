@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Account\AccountServiceContract;
-use App\Services\Account\AccountServiceEloquent;
+use App\Services\Account\AccountService;
 use Illuminate\Support\ServiceProvider;
 
 class AccountServiceServiceProvider extends ServiceProvider
@@ -24,7 +24,7 @@ class AccountServiceServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             AccountServiceContract::class,
-            AccountServiceEloquent::class
+            AccountService::class
         );
     }
 
