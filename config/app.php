@@ -174,6 +174,12 @@ return [
          */
         App\Providers\AccountRepositoryServiceProvider::class,
         App\Providers\EventRepositoryServiceProvider::class,
+
+        /*
+         * Service Service Providers
+         */
+        App\Services\AccountServiceServiceProvider::class,
+        App\Services\EventServiceServiceProvider::class,
     ])->toArray(),
 
     /*
