@@ -25,7 +25,7 @@ class ResetController extends Controller
             DB::table('accounts')->truncate();
             DB::table('events')->truncate();
 
-            return response()->json('Success', Response::HTTP_OK);
+            return response('OK', 200)->header('Content-Type', 'text/plain');
         } catch (Exception $exception) {
             return response()->json(0, Response::HTTP_NOT_FOUND);
         }

@@ -24,18 +24,16 @@ class EventService implements EventServiceContract
         switch ($eventData['type']) {
             case Event::EVENT_TYPE_DEPOSIT:
                 $account = $this->deposit($eventData);
-                $this->eventRepository->store($eventData);
-
-                return ['destination' => ['id' => $account->id, 'balance' => $account->balance]];
+                // $this->eventRepository->store($eventData);
+                return ['destination' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             case Event::EVENT_TYPE_TRANSFER:
                 return $this->transfer($eventData);
                 break;
             case Event::EVENT_TYPE_WITHDRAW:
                 $account = $this->withdraw($eventData);
-                $this->eventRepository->store($eventData);
-
-                return ['origin' => ['id' => $account->id, 'balance' => $account->balance]];
+                // $this->eventRepository->store($eventData);
+                return ['origin' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             default:
                 throw new Exception("It is not possible perform this action", Response::HTTP_METHOD_NOT_ALLOWED);
@@ -52,7 +50,6 @@ class EventService implements EventServiceContract
             $account->balance = $account->balance + $eventData['amount'];
             $account->update();
         }
-
         return $account;
     }
 
@@ -60,16 +57,15 @@ class EventService implements EventServiceContract
     {
         $originAccount = $this->withdraw($eventData);
         $destinationAccount = $this->deposit($eventData);
-
-        $this->eventRepository->store($eventData);
+        // $this->eventRepository->store($eventData);
 
         return [
             'origin' => [
-                'id' => $originAccount->id,
+                'id' => (string) $originAccount->id,
                 'balance' => $originAccount->balance
             ],
             'destination' => [
-                'id' => $destinationAccount->id,
+                'id' => (string) $destinationAccount->id,
                 'balance' => $destinationAccount->balance
             ]
         ];
@@ -87,10 +83,5 @@ class EventService implements EventServiceContract
         } else {
             throw new Exception('A conta de origem não possui saldo suficiente.', Response::HTTP_NOT_FOUND);
         }
-    }
-
-    private function saveEvent(array $eventData)
-    {
-        $this->eventRepository->store($eventData);
     }
 }
