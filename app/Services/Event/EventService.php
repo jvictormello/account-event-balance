@@ -8,9 +8,9 @@ class EventService implements EventServiceContract
 {
     protected $eventRepository;
 
-    public function __construct(EventRepositoryContract $eventRepository)
+    public function __construct(EventRepositoryContract $eventRepositoryContract)
     {
-        $this->eventRepository = $eventRepository;
+        $this->eventRepository = $eventRepositoryContract;
     }
 
     public function getAllEvents()
