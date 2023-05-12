@@ -10,6 +10,10 @@ class Event extends Model
 {
     use HasFactory;
 
+    public const EVENT_TYPE_DEPOSIT = 'deposit';
+    public const EVENT_TYPE_WITHDRAW = 'withdraw';
+    public const EVENT_TYPE_TRANSFER = 'transfer';
+
     /**
      * The attributes that are mass assignable.
      *
