@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 
 # AccountController
 Route::get('/balance', [AccountController::class, 'show']);
+
+# EventController
+Route::post('/event', [EventController::class, 'store']);
