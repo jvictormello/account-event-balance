@@ -24,7 +24,7 @@ class EventService implements EventServiceContract
         switch ($eventData['type']) {
             case Event::EVENT_TYPE_DEPOSIT:
                 $account = $this->deposit($eventData);
-                $this->eventRepository->store($eventData);
+                // $this->eventRepository->store($eventData);
                 return ['destination' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             case Event::EVENT_TYPE_TRANSFER:
@@ -32,7 +32,7 @@ class EventService implements EventServiceContract
                 break;
             case Event::EVENT_TYPE_WITHDRAW:
                 $account = $this->withdraw($eventData);
-                $this->eventRepository->store($eventData);
+                // $this->eventRepository->store($eventData);
                 return ['origin' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             default:
@@ -57,7 +57,7 @@ class EventService implements EventServiceContract
     {
         $originAccount = $this->withdraw($eventData);
         $destinationAccount = $this->deposit($eventData);
-        $this->eventRepository->store($eventData);
+        // $this->eventRepository->store($eventData);
 
         return [
             'origin' => [
