@@ -10,11 +10,11 @@ class EventService implements EventServiceContract
 
     public function __construct(EventRepositoryContract $eventRepository)
     {
-        $this->EventRepository = $eventRepository;
+        $this->eventRepository = $eventRepository;
     }
 
     public function getAllEvents()
     {
-        return $this->EventRepository->all()->toArray();
+        return $this->eventRepository->all()->toArray();
     }
 }
