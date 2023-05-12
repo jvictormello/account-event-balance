@@ -26,7 +26,7 @@ class EventService implements EventServiceContract
                 $account = $this->deposit($eventData);
                 $this->eventRepository->store($eventData);
 
-                return ['destination' => ['id' => $account->id, 'balance' => $account->balance]];
+                return ['destination' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             case Event::EVENT_TYPE_TRANSFER:
                 return $this->transfer($eventData);
@@ -35,7 +35,7 @@ class EventService implements EventServiceContract
                 $account = $this->withdraw($eventData);
                 $this->eventRepository->store($eventData);
 
-                return ['origin' => ['id' => $account->id, 'balance' => $account->balance]];
+                return ['origin' => ['id' => (string) $account->id, 'balance' => $account->balance]];
                 break;
             default:
                 throw new Exception("It is not possible perform this action", Response::HTTP_METHOD_NOT_ALLOWED);
@@ -52,7 +52,6 @@ class EventService implements EventServiceContract
             $account->balance = $account->balance + $eventData['amount'];
             $account->update();
         }
-
         return $account;
     }
 
@@ -60,16 +59,15 @@ class EventService implements EventServiceContract
     {
         $originAccount = $this->withdraw($eventData);
         $destinationAccount = $this->deposit($eventData);
-
         $this->eventRepository->store($eventData);
 
         return [
             'origin' => [
-                'id' => $originAccount->id,
+                'id' => (string) $originAccount->id,
                 'balance' => $originAccount->balance
             ],
             'destination' => [
-                'id' => $destinationAccount->id,
+                'id' => (string) $destinationAccount->id,
                 'balance' => $destinationAccount->balance
             ]
         ];
