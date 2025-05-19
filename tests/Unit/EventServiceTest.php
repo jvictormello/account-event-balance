@@ -19,7 +19,6 @@ class EventServiceTest extends TestCase
     {
         parent::setUp();
 
-        // Usando o contrato exato do repositório
         $this->accountRepository = Mockery::mock(AccountRepositoryEloquentContract::class);
         $accountService = new AccountService($this->accountRepository);
         $this->eventService = new EventService($accountService);

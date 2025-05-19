@@ -98,7 +98,7 @@ class AccountService implements AccountServiceContract
             throw new Exception('Invalid amount.');
         }
 
-        // Reutiliza os métodos withdraw e deposit
+        // Re-use withdraw e deposit
         $origin = $this->withdraw([
             'origin' => $eventData['origin'],
             'amount' => $eventData['amount']

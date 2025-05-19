@@ -1,4 +1,3 @@
-
 # Account Event Balance API
 
 ## 📌 Description
@@ -8,7 +7,7 @@ This is an API for account management and transactions, allowing you to create a
 - **PHP 8.1**
 - **Laravel 10.x**
 - **MySQL** (Docker)
-- **Docker and Docker Compose**
+- **Docker and Docker Compose** (including Ngrok as a service)
 
 ## 📦 Installation
 1. Clone the repository:
@@ -28,19 +27,32 @@ This is an API for account management and transactions, allowing you to create a
    docker-compose up -d
    ```
 
-4. Access the application container:
+4. Configure Ngrok Token:
+   - Access the Ngrok Dashboard: https://dashboard.ngrok.com/get-started/your-authtoken
+   - Copy your Ngrok Auth Token.
+   - Add the token to your Docker Compose environment file (`.env`):
+     ```bash
+     NGROK_AUTHTOKEN=your-ngrok-auth-token
+     ```
+
+5. Access the application container:
    ```bash
    docker-compose exec app bash
    ```
 
-5. Run migrations to create the database tables:
+6. Run migrations to create the database tables:
    ```bash
    php artisan migrate
    ```
 
-6. Generate the application key:
+7. Generate the application key:
    ```bash
    php artisan key:generate
+   ```
+
+8. Ngrok is automatically configured as a service in Docker Compose. To access it, use:
+   ```bash
+   docker-compose logs ngrok
    ```
 
 ## 🚀 Usage
@@ -89,7 +101,8 @@ This is an API for account management and transactions, allowing you to create a
    - Access the application container: `docker-compose exec app bash`.
    - Run: `php artisan migrate:reset && php artisan migrate`.
 
-3. **Application key missing:** - Run: `php artisan key:generate`.
+3. **Application key missing:**
+   - Run: `php artisan key:generate`.
 
 4. **500 Internal Server Error:**
    - Check the container logs: `docker-compose logs app`.
