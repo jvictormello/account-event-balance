@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-abstract class BaseRepositoryEloquent implements BaseRepositoryContract
+abstract class BaseRepositoryEloquent implements BaseRepositoryEloquentContract
 {
     public function getById(int $id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     public function all()

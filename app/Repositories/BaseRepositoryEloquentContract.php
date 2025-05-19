@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface BaseRepositoryContract
+interface BaseRepositoryEloquentContract
 {
     public function getById(int $id);
     public function all();
