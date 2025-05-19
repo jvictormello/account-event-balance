@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\AccountResource;
+use App\Http\Requests\AccountRequest;
 use App\Services\Account\AccountServiceContract;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
@@ -21,16 +19,12 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(AccountRequest $request): JsonResponse
     {
-        try {
-            $accountId = $request->has('account_id') ? $request->get('account_id') : null;
+        $accountId = $request->validated()['account_id'];
 
-            return response()->json($this->accountService->getAccountBalanceByAccountId($accountId), Response::HTTP_OK);
-        } catch (ModelNotFoundException $exception) {
-            return response()->json(0, Response::HTTP_NOT_FOUND);
-        } catch (Exception $exception) {
-            return response()->json(0, Response::HTTP_NOT_FOUND);
-        }
+        $balance = $this->accountService->getAccountBalanceByAccountId($accountId);
+
+        return response()->json($balance, Response::HTTP_OK);
     }
 }

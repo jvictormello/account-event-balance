@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Services\Event\EventServiceContract;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends Controller
@@ -20,20 +19,10 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $eventRequest): JsonResponse
     {
-        try {
-            $eventData = [];
-            $eventData['type'] = $request->has('type') ? $request->get('type') : null;
-            $eventData['destination_account_id'] = $request->has('destination') ? $request->get('destination') : null;
-            $eventData['origin_account_id'] = $request->has('origin') ? $request->get('origin') : null;
-            $eventData['amount'] = $request->has('amount') ? $request->get('amount') : null;
+        $eventData = $eventRequest->validated();
 
-            return response()->json($this->eventService->executeEvent($eventData), Response::HTTP_CREATED);
-        } catch (ModelNotFoundException $exception) {
-            return response()->json(0, Response::HTTP_NOT_FOUND);
-        } catch (Exception $exception) {
-            return response()->json(0, Response::HTTP_NOT_FOUND);
-        }
+        return response()->json($this->eventService->executeEvent($eventData), Response::HTTP_CREATED);
     }
 }
