@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\Event\EventRepositoryContract;
+use App\Repositories\Event\EventRepositoryEloquentContract;
 use App\Repositories\Event\EventRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +23,7 @@ class EventRepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            EventRepositoryContract::class,
+            EventRepositoryEloquentContract::class,
             EventRepositoryEloquent::class
         );
     }
@@ -35,6 +35,6 @@ class EventRepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        return [EventRepositoryContract::class];
+        return [EventRepositoryEloquentContract::class];
     }
 }

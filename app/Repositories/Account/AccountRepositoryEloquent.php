@@ -5,7 +5,7 @@ namespace App\Repositories\Account;
 use App\Models\Account;
 use App\Repositories\BaseRepositoryEloquent;
 
-class AccountRepositoryEloquent extends BaseRepositoryEloquent implements AccountRepositoryContract
+class AccountRepositoryEloquent extends BaseRepositoryEloquent implements AccountRepositoryEloquentContract
 {
     protected $model;
 

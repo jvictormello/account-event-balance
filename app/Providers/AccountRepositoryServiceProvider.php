@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\Account\AccountRepositoryContract;
+use App\Repositories\Account\AccountRepositoryEloquentContract;
 use App\Repositories\Account\AccountRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +23,7 @@ class AccountRepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            AccountRepositoryContract::class,
+            AccountRepositoryEloquentContract::class,
             AccountRepositoryEloquent::class
         );
     }
@@ -35,6 +35,6 @@ class AccountRepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        return [AccountRepositoryContract::class];
+        return [AccountRepositoryEloquentContract::class];
     }
 }
