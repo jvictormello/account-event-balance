@@ -61,8 +61,6 @@ class AccountService implements AccountServiceContract
         ];
     }
 
-    // AccountService.php
-
     public function withdraw(array $eventData)
     {
         if ($eventData['amount'] <= 0) {
@@ -79,12 +77,8 @@ class AccountService implements AccountServiceContract
             throw new Exception('Insufficient balance.');
         }
 
-        // Atualizando o saldo e salvando via repositório
         $account->balance -= $eventData['amount'];
-        $this->accountRepository->store([
-            'id' => $account->id,
-            'balance' => $account->balance
-        ]);
+        $account->save();
 
         return [
             'origin' => [
@@ -93,7 +87,6 @@ class AccountService implements AccountServiceContract
             ]
         ];
     }
-
 
     public function transfer(array $eventData)
     {
